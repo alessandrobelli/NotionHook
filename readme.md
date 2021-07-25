@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Connect to Notion step
         id: notion
-        uses: alessandrobelli/NotionHook@v1.0
+        uses: alessandrobelli/NotionHook@1.0
         with:
           notion_secret: ${{ secrets.NOTION_SECRET }}
           notion_database: ${{ secrets.NOTION_DATABASE }}
