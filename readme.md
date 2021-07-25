@@ -1,6 +1,6 @@
 # Notion Hook
 
-This action syncronize your Repository 4commits into a Notion Database.
+This action syncronize your Repository commits into a Notion Database.
 
 ## Setup
 
@@ -13,6 +13,8 @@ This action syncronize your Repository 4commits into a Notion Database.
 6. Create a new secret called `NOTION_DATABASE` with the database ID.
 
 ## Inputs
+
+Every input has its own default value. Check if they correspond to yours in the database.
 
 ### `commit_description`
 **text**
