@@ -1,5 +1,8 @@
 name: 'NotionHook'
 description: 'Sync your commits to Notion'
+branding:
+  icon: 'check-circle'  
+  color: 'white'
 inputs:
   notion_secret:
     description: 'Notion Secret retrieved from My Integrations on notion.so/my-integrations'
