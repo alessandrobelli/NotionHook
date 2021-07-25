@@ -1,0 +1,28 @@
+name: 'NotionHook'
+description: 'Sync your commits to Notion'
+inputs:
+  notion_secret:
+    description: 'Notion Secret retrieved from My Integrations on notion.so/my-integrations'
+    required: true
+  notion_database:
+    description: 'the id of the database you want to save the commits'
+    required: true
+  commit_description:
+    description: "Name of the Database column for the description field: this is the commit message after a carriage return."
+    required: true
+    default: "description"
+  commit_url:
+    description: "Name of Database column for commit url"
+    required: true
+    default: "Url"
+  commit_id:
+    description: "Name of the Database column for commit id"
+    required: true
+    default: "Id"
+  commit_project:
+    description: "MultiSelect field for the project name: please pre-fill it in Notion first!"
+    required: true
+    default: "Project"
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
