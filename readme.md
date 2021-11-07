@@ -2,6 +2,8 @@
 
 This action syncronize your Repository commits into a Notion Database.
 
+📽️ Video Explanation: https://youtu.be/hARJlFH5MDE
+
 ## Setup
 
 1. Create a new private Notion integration here: https://www.notion.so/my-integrations.
