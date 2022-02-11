@@ -21,7 +21,7 @@ async function createCommit(notion, commits) {
       description += " " + element;
     });
 
-    description += getFiles();
+    description += getFiles() + " test";
 
     notion.pages.create({
       parent: {
