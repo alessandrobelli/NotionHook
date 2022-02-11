@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/alessandrobelli/NotionHook#readme",
   "dependencies": {
-    "@actions/core": "^1.4.0",
+    "@actions/core": "^1.6.0",
     "@actions/github": "^5.0.0",
-    "@notionhq/client": "^0.2.3"
+    "@notionhq/client": "^0.2.4"
   }
 }
