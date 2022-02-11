@@ -1,6 +1,3 @@
-import * as core from "@actions/core";
-import { context, GitHub } from "@actions/github";
-
 const core = require("@actions/core");
 const github = require("@actions/github");
 const { Client } = require("@notionhq/client");
@@ -98,7 +95,7 @@ async function createCommit(notion, commits) {
   }
 })();
 
-function getFiles() {
+async function getFiles() {
   try {
     // Create GitHub client with the API token.
     const client = new GitHub(core.getInput("token", { required: true }));
