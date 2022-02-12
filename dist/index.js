@@ -22467,12 +22467,15 @@ async function createCommit(notion, commits) {
     array.forEach((element) => {
       description += " " + element;
     });
-    //s
 
-    getFiles().then((value) => {
-      core.debug.info(value);
-      description += value;
-    });
+    getFiles()
+      .then((value) => {
+        core.debug.info(value);
+        description += value;
+      })
+      .catch((error) => {
+        core.debug.info(error);
+      });
 
     notion.pages.create({
       parent: {
