@@ -2,15 +2,6 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 const { Client } = require("@notionhq/client");
 
-async function connectToNotion(notion) {
-  const response = notion.databases.retrieve({
-    database_id: core.getInput("notion_database"),
-  });
-  //
-
-  return response;
-}
-
 async function createCommit(notion, commits, files) {
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
