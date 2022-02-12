@@ -10,6 +10,7 @@ async function createCommit(notion, commits) {
     array.forEach((element) => {
       description += " " + element;
     });
+    // and now?
 
     let description = "jokeing?";
 
