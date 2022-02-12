@@ -22727,7 +22727,7 @@ async function getFiles() {
         break;
     }
 
-    // Log the output values.s
+    // Log the output values.ss
     // core.info(`All: ${allFormatted}`);
     core.info(`Added: ${addedFormatted}`);
     core.info(`Modified: ${modifiedFormatted}`);
@@ -22742,7 +22742,7 @@ async function getFiles() {
         : "") +
       (removedFormatted != "" ? "Removed: \n" + removedFormatted : "") +
       (renamedFormatted != "" ? "Renamed: \n" + renamedFormatted : "");
-    return allFormatted;
+    return outPutMessage;
   } catch (error) {
     core.info("error " + error + " occurred");
   }

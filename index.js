@@ -299,7 +299,7 @@ async function getFiles() {
         : "") +
       (removedFormatted != "" ? "Removed: \n" + removedFormatted : "") +
       (renamedFormatted != "" ? "Renamed: \n" + renamedFormatted : "");
-    return allFormatted;
+    return outPutMessage;
   } catch (error) {
     core.info("error " + error + " occurred");
   }
