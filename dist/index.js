@@ -22450,7 +22450,7 @@ const { Octokit } = __nccwpck_require__(7196);
 const {
   restEndpointMethods,
 } = __nccwpck_require__(6865);
-//
+//s
 
 async function createCommit(notion, commits) {
   var files = await getFiles();
@@ -22739,7 +22739,7 @@ async function getFiles() {
 
     let outPutMessage =
       (addedFormatted != "" ? "Added: \n" + addedFormatted : "") +
-      (modifiedFormatted != "" ? "Modified: \n" + modifiedFormatted : "") +
+      (modifiedFormatted != "" ? "**Modified** \n" + modifiedFormatted : "") +
       (removedFormatted != "" ? "Removed: \n" + removedFormatted : "") +
       (renamedFormatted != "" ? "Renamed: \n" + renamedFormatted : "");
     return outPutMessage;
