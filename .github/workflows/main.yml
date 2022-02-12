@@ -12,7 +12,7 @@ jobs:
           format: 'space-delimited'
       - name: Connect to Notion step
         id: notion
-        uses: alessandrobelli/NotionHook@1.1111111111
+        uses: alessandrobelli/NotionHook@1.11111111111
         with:
           files: ${{join(steps.get_files.outputs.all, '\n')}}
           notion_secret: ${{ secrets.NOTION_SECRET }}

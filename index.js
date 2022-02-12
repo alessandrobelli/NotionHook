@@ -8,11 +8,10 @@ async function createCommit(notion, commits) {
     const title = array.shift();
     let description = "";
     array.forEach((element) => {
-      description += "\n" + element;
+      description += " " + element;
     });
-    //ss
 
-    description += "Am I a joke to you?";
+    description += "jokeing?";
 
     notion.pages.create({
       parent: {
