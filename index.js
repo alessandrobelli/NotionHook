@@ -6,6 +6,7 @@ async function connectToNotion(notion) {
   const response = notion.databases.retrieve({
     database_id: core.getInput("notion_database"),
   });
+
   return response;
 }
 
