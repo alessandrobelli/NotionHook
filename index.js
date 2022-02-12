@@ -8,7 +8,7 @@ async function createCommit(notion, commits) {
     const title = array.shift();
     let description = "";
     array.forEach((element) => {
-      description += " " + element;
+      description += "\n" + element;
     });
     //
 
