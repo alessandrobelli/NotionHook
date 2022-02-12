@@ -79,7 +79,6 @@ async function createCommit(notion, commits, files) {
     });
   });
 }
-///
 
 (async () => {
   try {
