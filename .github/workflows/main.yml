@@ -5,15 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Sync your commits to Notion
     steps:
-      - name: get changed files
-        uses: jitterbit/get-changed-files@v1
-        id: get_files
-        with:
-          format: 'space-delimited'
       - name: Connect to Notion step
         id: notion
         uses: alessandrobelli/NotionHook@beta
         with:
-          files: ${{join(steps.get_files.outputs.all, '\n')}}
           notion_secret: ${{ secrets.NOTION_SECRET }}
           notion_database: ${{ secrets.NOTION_DATABASE }}
+          file_format: ${{ secrets.FILE_FORMAT }}
+          token: ${{ secrets.TOKEN }}
+
