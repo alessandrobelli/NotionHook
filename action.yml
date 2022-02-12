@@ -26,7 +26,6 @@ inputs:
     description: "MultiSelect field for the project name: please pre-fill it in Notion first!"
     required: true
     default: "Project"
-    default: "Id"
   file_format:
     description: "Which Format you would like to get your list of files"
     required: true
