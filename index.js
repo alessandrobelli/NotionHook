@@ -24,7 +24,6 @@ async function createCommit(notion, commits) {
     array.forEach((element) => {
       description += " " + element;
     });
-    //s
 
     getFiles().then((value) => {
       core.debug.info(value);
