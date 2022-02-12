@@ -114,7 +114,7 @@ async function getFiles() {
     // Create GitHub client with the API toaken.
     const format = core.getInput("files_format", { required: true });
 
-    // Ensure that the format parameter is set properly.
+    // Ensure that the format parameter is set properly.s
     if (format !== "space-delimited") {
       core.setFailed(
         `Format must be one of 'string-delimited', 'csv', or 'json', got '${format}'.`
