@@ -17,6 +17,7 @@ async function createCommit(notion, commits) {
     array.forEach((element) => {
       description += " " + element;
     });
+    core.info(description);
 
     getFiles()
       .then((value) => {
@@ -26,6 +27,7 @@ async function createCommit(notion, commits) {
         core.info("success! printing the values below");
         core.info(value);
         description += value;
+        core.info(description);
       })
       .catch((error) => {
         core.info("error!");
@@ -33,6 +35,8 @@ async function createCommit(notion, commits) {
         core.info("error!");
         core.info(error);
       });
+
+    core.info(description);
 
     notion.pages.create({
       parent: {
