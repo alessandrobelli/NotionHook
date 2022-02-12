@@ -7,7 +7,7 @@ const { Octokit } = require("@octokit/core");
 const {
   restEndpointMethods,
 } = require("@octokit/plugin-rest-endpoint-methods");
-//s
+//
 
 async function createCommit(notion, commits) {
   var temp = await getFiles();
