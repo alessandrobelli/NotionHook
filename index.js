@@ -19,8 +19,7 @@ async function createCommit(notion, commits, files) {
     array.forEach((element) => {
       description += " " + element;
     });
-    //s
-
+    //
     description += "\n" + files;
 
     notion.pages.create({
@@ -92,14 +91,8 @@ async function createCommit(notion, commits, files) {
 (async () => {
   try {
     const notion = new Client({ auth: core.getInput("notion_secret") });
-    await getFiles().then(
-      (value) => {
-        createCommit(notion, github.context.payload.commits, value);
-      },
-      (reason) => {
-        createCommit(notion, github.context.payload.commits, reason);
-      }
-    );
+    let files = await getFiles();
+    await createCommit(notion, github.context.payload.commits, files);
   } catch (error) {
     core.setFailed(error.message);
   }
