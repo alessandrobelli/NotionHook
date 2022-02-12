@@ -17,4 +17,3 @@ jobs:
           files: ${{join(steps.get_files.outputs.all, '\n')}}
           notion_secret: ${{ secrets.NOTION_SECRET }}
           notion_database: ${{ secrets.NOTION_DATABASE }}
-
