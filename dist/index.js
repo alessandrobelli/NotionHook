@@ -22469,9 +22469,12 @@ async function createCommit(notion, commits) {
     });
     //s
 
-    getFiles().then((value) => {
-      description += value;
-    });
+    // getFiles().then((value) => {
+    //   core.debug.info(value);
+    //   description += value;
+    // });
+    core.debug.info(getFiles());
+    description = getFiles();
 
     notion.pages.create({
       parent: {
@@ -22548,7 +22551,7 @@ async function createCommit(notion, commits) {
   }
 })();
 
-async function getFiles() {
+function getFiles() {
   try {
     const MyOctokit = Octokit.plugin(restEndpointMethods);
     const octokit = new MyOctokit({
@@ -22603,8 +22606,8 @@ async function getFiles() {
     }
 
     // Use GitHub's compare two commits API.
-    // https://developer.github.com/v3/repos/commits/#compare-two-commits
-    const response = await octokit.repos.compareCommits({
+    // https://developer.github.com/v3/repos/commits/#compare-two-commitss
+    const response = octokit.repos.compareCommits({
       base,
       head,
       owner: github.context.repo.owner,
