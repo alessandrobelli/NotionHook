@@ -295,9 +295,7 @@ async function getFiles() {
 
     let outPutMessage =
       (addedFormatted != "" ? "Added: \n" + addedFormatted : "") +
-      (modifiedFormatted != ""
-        ? "Modified: \n" + renamedFormattedmodifiedFormatted
-        : "") +
+      (modifiedFormatted != "" ? "Modified: \n" + modifiedFormatted : "") +
       (removedFormatted != "" ? "Removed: \n" + removedFormatted : "") +
       (renamedFormatted != "" ? "Renamed: \n" + renamedFormatted : "");
     return outPutMessage;
