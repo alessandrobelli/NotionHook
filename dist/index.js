@@ -22454,6 +22454,7 @@ const {
 
 async function createCommit(notion, commits) {
   var files = await getFiles();
+  core.info(files);
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
     const title = array.shift();
@@ -22727,12 +22728,12 @@ async function getFiles() {
         break;
     }
 
-    // Log the output values.ss
+    // Log the output values.
     // core.info(`All: ${allFormatted}`);
-    core.info(`Added: ${addedFormatted}`);
-    core.info(`Modified: ${modifiedFormatted}`);
-    core.info(`Removed: ${removedFormatted}`);
-    core.info(`Renamed: ${renamedFormatted}`);
+    // core.info(`Added: ${addedFormatted}`);
+    // core.info(`Modified: ${modifiedFormatted}`);
+    // core.info(`Removed: ${removedFormatted}`);
+    // core.info(`Renamed: ${renamedFormatted}`);
     // core.info(`Added or modified: ${addedModifiedFormatted}`);
 
     let outPutMessage =
