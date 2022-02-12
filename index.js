@@ -1,6 +1,7 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 const { Client } = require("@notionhq/client");
+const { createTokenAuth } = require("@octokit/auth-token");
 
 async function connectToNotion(notion) {
   const response = notion.databases.retrieve({
@@ -103,9 +104,9 @@ async function createCommit(notion, commits) {
 async function getFiles() {
   try {
     // Create GitHub client with the API token.
-    const client = new github.GitHub(
-      core.getInput("token", { required: true })
-    );
+    // const client = new github.GitHub(
+    //   core.getInput("token", { required: true })
+    // );
     const format = core.getInput("files_format", { required: true });
 
     core.info("trying to fetch files");
@@ -156,7 +157,7 @@ async function getFiles() {
 
     // Use GitHub's compare two commits API.
     // https://developer.github.com/v3/repos/commits/#compare-two-commits
-    const response = await client.repos.compareCommits({
+    const response = await github.context.repos.compareCommits({
       base,
       head,
       owner: context.repo.owner,

@@ -9240,6 +9240,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(6024);
 const github = __nccwpck_require__(5016);
 const { Client } = __nccwpck_require__(7417);
+const { createTokenAuth } = __nccwpck_require__(3948);
 
 async function connectToNotion(notion) {
   const response = notion.databases.retrieve({
@@ -9342,9 +9343,9 @@ async function createCommit(notion, commits) {
 async function getFiles() {
   try {
     // Create GitHub client with the API token.
-    const client = new github.GitHub(
-      core.getInput("token", { required: true })
-    );
+    // const client = new github.GitHub(
+    //   core.getInput("token", { required: true })
+    // );
     const format = core.getInput("files_format", { required: true });
 
     core.info("trying to fetch files");
@@ -9395,7 +9396,7 @@ async function getFiles() {
 
     // Use GitHub's compare two commits API.
     // https://developer.github.com/v3/repos/commits/#compare-two-commits
-    const response = await client.repos.compareCommits({
+    const response = await github.context.repos.compareCommits({
       base,
       head,
       owner: context.repo.owner,
@@ -9500,7 +9501,7 @@ async function getFiles() {
         break;
     }
 
-    // Log the output values
+    // Log the output values.
     core.info(`All: ${allFormatted}`);
     core.info(`Added: ${addedFormatted}`);
     core.info(`Modified: ${modifiedFormatted}`);

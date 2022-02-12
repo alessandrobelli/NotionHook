@@ -11,7 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/alessandrobelli/NotionHook.git"
   },
-  "keywords": ["notion-hook","Notion","productivity"],
+  "keywords": [
+    "notion-hook",
+    "Notion",
+    "productivity"
+  ],
   "author": "Alessandro Belli",
   "license": "MIT",
   "bugs": {
@@ -21,6 +25,7 @@
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@actions/github": "^5.0.0",
-    "@notionhq/client": "^0.2.4"
+    "@notionhq/client": "^0.2.4",
+    "@octokit/auth-token": "^2.5.0"
   }
 }
