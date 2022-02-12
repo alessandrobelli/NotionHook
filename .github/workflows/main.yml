@@ -11,6 +11,6 @@ jobs:
         with:
           notion_secret: ${{ secrets.NOTION_SECRET }}
           notion_database: ${{ secrets.NOTION_DATABASE }}
-          files_format: ${{ secrets.FILE_FORMAT }}
+          files_format: 'string-delimited'
           token: ${{ secrets.TOKEN }}
 
