@@ -104,14 +104,15 @@ async function createCommit(notion, commits) {
 async function getFiles() {
   try {
     // Create GitHub client with the API token.
-    // const client = new github.GitHub(s
+    // const client = new github.GitHub(
     //   core.getInput("toksen", { required: true })
     // );
-    const format = core.info("trying to fetch files");
+    const format = core.getInput("files_format", { required: true });
+
     // Ensure that the format parameter is set properly.
     if (format !== "space-delimited") {
       core.setFailed(
-        `Format must be one of 'space-delimited', 'csv', or 'json', got '${format}'.`
+        `Format must be one of 'string-delimited', 'csv', or 'json', got '${format}'.`
       );
     }
 
