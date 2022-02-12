@@ -7,7 +7,7 @@ const { Octokit } = require("@octokit/core");
 const {
   restEndpointMethods,
 } = require("@octokit/plugin-rest-endpoint-methods");
-
+//
 async function connectToNotion(notion) {
   const response = notion.databases.retrieve({
     database_id: core.getInput("notion_database"),
