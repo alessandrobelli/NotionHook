@@ -22450,7 +22450,7 @@ const { Octokit } = __nccwpck_require__(7196);
 const {
   restEndpointMethods,
 } = __nccwpck_require__(6865);
-//s
+//
 
 async function createCommit(notion, commits) {
   commits.forEach((commit) => {
@@ -22705,12 +22705,12 @@ async function getFiles() {
     }
 
     // Log the output values.
-    core.info(`All: ${allFormatted}`);
-    core.info(`Added: ${addedFormatted}`);
-    core.info(`Modified: ${modifiedFormatted}`);
-    core.info(`Removed: ${removedFormatted}`);
-    core.info(`Renamed: ${renamedFormatted}`);
-    core.info(`Added or modified: ${addedModifiedFormatted}`);
+    // core.info(`All: ${allFormatted}`);
+    // core.info(`Added: ${addedFormatted}`);
+    // core.info(`Modified: ${modifiedFormatted}`);
+    // core.info(`Removed: ${removedFormatted}`);
+    // core.info(`Renamed: ${renamedFormatted}`);
+    // core.info(`Added or modified: ${addedModifiedFormatted}`);
 
     return allFormatted;
   } catch (error) {

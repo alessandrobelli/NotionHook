@@ -262,12 +262,12 @@ async function getFiles() {
     }
 
     // Log the output values.
-    core.info(`All: ${allFormatted}`);
-    core.info(`Added: ${addedFormatted}`);
-    core.info(`Modified: ${modifiedFormatted}`);
-    core.info(`Removed: ${removedFormatted}`);
-    core.info(`Renamed: ${renamedFormatted}`);
-    core.info(`Added or modified: ${addedModifiedFormatted}`);
+    // core.info(`All: ${allFormatted}`);
+    // core.info(`Added: ${addedFormatted}`);
+    // core.info(`Modified: ${modifiedFormatted}`);
+    // core.info(`Removed: ${removedFormatted}`);
+    // core.info(`Renamed: ${renamedFormatted}`);
+    // core.info(`Added or modified: ${addedModifiedFormatted}`);
 
     return allFormatted;
   } catch (error) {
