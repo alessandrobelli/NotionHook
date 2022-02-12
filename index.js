@@ -161,11 +161,6 @@ async function getFiles() {
 
     // Use GitHub's compare two commits API.
     // https://developer.github.com/v3/repos/commits/#compare-two-commits
-    await octokit.request("GET /repos/{owner}/{repo}/compare/{basehead}", {
-      owner: "octocat",
-      repo: "hello-world",
-      basehead: "basehead",
-    });
     const response = await octokit.repos.compareCommits({
       base,
       head,

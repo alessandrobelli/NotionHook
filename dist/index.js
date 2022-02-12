@@ -22557,7 +22557,7 @@ async function getFiles() {
     // Create GitHub client with the API toaken.
     const format = core.getInput("files_format", { required: true });
 
-    // Ensure that the format parameter is set properly.
+    // Ensure that the format parameter is set properly.s
     if (format !== "space-delimited") {
       core.setFailed(
         `Format must be one of 'string-delimited', 'csv', or 'json', got '${format}'.`
@@ -22604,11 +22604,6 @@ async function getFiles() {
 
     // Use GitHub's compare two commits API.
     // https://developer.github.com/v3/repos/commits/#compare-two-commits
-    await octokit.request("GET /repos/{owner}/{repo}/compare/{basehead}", {
-      owner: "octocat",
-      repo: "hello-world",
-      basehead: "basehead",
-    });
     const response = await octokit.repos.compareCommits({
       base,
       head,
