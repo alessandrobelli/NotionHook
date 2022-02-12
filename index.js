@@ -81,10 +81,11 @@ async function createCommit(notion, commits, files) {
 }
 ///
 
-(() => {
+(async () => {
   try {
     const notion = new Client({ auth: core.getInput("notion_secret") });
     getFiles().then((value) => {
+      console.log(value);
       createCommit(notion, github.context.payload.commits, value);
     });
   } catch (error) {
