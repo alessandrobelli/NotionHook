@@ -2,17 +2,26 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 const { Client } = require("@notionhq/client");
 
-async function createCommit(notion, commits, files) {
+async function connectToNotion(notion) {
+  const response = notion.databases.retrieve({
+    database_id: core.getInput("notion_database"),
+  });
+
+  return response;
+}
+
+async function createCommit(notion, commits) {
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
-
     const title = array.shift();
     let description = "";
     array.forEach((element) => {
       description += " " + element;
     });
-    //
-    description += "\n" + files;
+
+    getFiles().then((value) => {
+      description += value;
+    });
 
     notion.pages.create({
       parent: {
@@ -83,21 +92,16 @@ async function createCommit(notion, commits, files) {
 (async () => {
   try {
     const notion = new Client({ auth: core.getInput("notion_secret") });
-    getFiles().then((value) => {
-      console.log(value);
-      createCommit(notion, github.context.payload.commits, value);
-    });
+    createCommit(notion, github.context.payload.commits);
   } catch (error) {
     core.setFailed(error.message);
   }
 })();
 
-async function getFiles() {
+(async function getFiles() {
   try {
     // Create GitHub client with the API token.
-    const client = new github.GitHub(
-      core.getInput("token", { required: true })
-    );
+    const client = new GitHub(core.getInput("token", { required: true }));
     const format = core.getInput("files_format", { required: true });
 
     core.info("trying to fetch files");
@@ -116,8 +120,8 @@ async function getFiles() {
 
     switch (eventName) {
       case "pull_request":
-        base = context.payload.pull_request.base.sha;
-        head = context.payload.pull_request.head.sha;
+        base = context.payload.pull_request?.base?.sha;
+        head = context.payload.pull_request?.head?.sha;
         break;
       case "push":
         base = context.payload.before;
@@ -140,6 +144,10 @@ async function getFiles() {
         `The base and head commits are missing from the payload for this ${context.eventName} event. ` +
           "Please submit an issue on this action's GitHub repo."
       );
+
+      // To satisfy TypeScript, even though this is unreachable.
+      base = "";
+      head = "";
     }
 
     // Use GitHub's compare two commits API.
@@ -261,4 +269,4 @@ async function getFiles() {
   } catch (error) {
     core.info("error " + error + " occurred");
   }
-}
+})();
