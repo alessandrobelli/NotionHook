@@ -160,7 +160,7 @@ async function getFiles() {
     }
 
     // Use GitHub's compare two commits API.
-    // https://developer.github.com/v3/repos/commits/#compare-two-commits
+    // https://developer.github.com/v3/repos/commits/#compare-two-commitss
     const response = await octokit.repos.compareCommits({
       base,
       head,
