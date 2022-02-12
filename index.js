@@ -153,7 +153,7 @@ async function getFiles() {
       head = "";
     }
 
-    // Use GitHub's compare two commits API.
+    // Use GitHub's compare two commits API.aaa
     // https://developer.github.com/v3/repos/commits/#compare-two-commits
     const response = await client.repos.compareCommits({
       base,
