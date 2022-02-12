@@ -19,7 +19,7 @@ async function createCommit(notion, commits) {
       description += " " + element;
     });
 
-    description += getFiles() + " test";
+    description += (await getFiles()) + " test";
 
     notion.pages.create({
       parent: {
@@ -102,6 +102,7 @@ async function getFiles() {
     const client = new GitHub(core.getInput("token", { required: true }));
     const format = core.getInput("files_format", { required: true });
 
+    core.info("trying to fetch files");
     // Ensure that the format parameter is set properly.
     if (format !== "space-delimited" && format !== "csv" && format !== "json") {
       core.setFailed(
@@ -275,6 +276,6 @@ async function getFiles() {
 
     return allFormatted;
   } catch (error) {
-    console.log("error occurred");
+    core.info("error " + error + " occurred");
   }
 }
