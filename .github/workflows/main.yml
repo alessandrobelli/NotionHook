@@ -1,27 +1,20 @@
 on: [push]
 
 jobs:
-  get_files:
-    outputs:
-      files: steps.get_files.outputs.all
+  Notion_Hook_job:
     runs-on: ubuntu-latest
-    name: get list of changed files
+    name: Sync your commits to Notion
     steps:
       - name: get changed files
         uses: jitterbit/get-changed-files@v1
         id: get_files
         with:
           format: 'space-delimited'
-  Notion_Hook_job:
-      name: Sync your commits to Notion
-      needs: get_files
-      runs-on: ubuntu-latest
-      steps:
-      - name: Connect to Notion
+      - name: Connect to Notion step
         id: notion
         uses: alessandrobelli/NotionHook@1.111111111
         with:
-          files: echo ${{needs.get_files.outputs.files}}
+          files: ${{join(steps.get_files.outputs.all, '\n')}}
           notion_secret: ${{ secrets.NOTION_SECRET }}
           notion_database: ${{ secrets.NOTION_DATABASE }}
 

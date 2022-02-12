@@ -2,14 +2,6 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 const { Client } = require("@notionhq/client");
 
-async function connectToNotion(notion) {
-  const response = notion.databases.retrieve({
-    database_id: core.getInput("notion_database"),
-  });
-
-  return response;
-}
-
 async function createCommit(notion, commits) {
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
@@ -19,7 +11,7 @@ async function createCommit(notion, commits) {
       description += " " + element;
     });
 
-    description += "Changed Files:\n" + core.getInput("files");
+    description += "Changed Files:\n" + core.getMultilineInput("files");
 
     notion.pages.create({
       parent: {
