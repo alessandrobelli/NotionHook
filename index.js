@@ -113,7 +113,7 @@ async function getFiles() {
         `Format must be one of 'string-delimited', 'csv', or 'json', got '${format}'.`
       );
     }
-    core.info(GitHub);
+    core.info(client);
 
     // Debug log the payload.
     core.debug(`Payload keys: ${Object.keys(github.context.payload)}`);

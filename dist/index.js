@@ -9352,7 +9352,7 @@ async function getFiles() {
         `Format must be one of 'string-delimited', 'csv', or 'json', got '${format}'.`
       );
     }
-    core.info(GitHub);
+    core.info(client);
 
     // Debug log the payload.
     core.debug(`Payload keys: ${Object.keys(github.context.payload)}`);
@@ -9392,7 +9392,7 @@ async function getFiles() {
       head = "";
     }
 
-    // Use GitHub's compare two commits API.
+    // Use GitHub's compare two commits API.aaa
     // https://developer.github.com/v3/repos/commits/#compare-two-commits
     const response = await client.repos.compareCommits({
       base,
