@@ -1,6 +1,5 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
-const { GitHub } = require("@actions/github");
 const { Client } = require("@notionhq/client");
 
 async function createCommit(notion, commits, files) {
@@ -81,11 +80,10 @@ async function createCommit(notion, commits, files) {
   });
 }
 
-(async () => {
+(() => {
   try {
     const notion = new Client({ auth: core.getInput("notion_secret") });
-    let files = await getFiles();
-    files.then((value) => {
+    getFiles().then((value) => {
       createCommit(notion, github.context.payload.commits, value);
     });
   } catch (error) {
@@ -96,7 +94,9 @@ async function createCommit(notion, commits, files) {
 async function getFiles() {
   try {
     // Create GitHub client with the API token.
-    const client = new GitHub(core.getInput("token", { required: true }));
+    const client = new github.GitHub(
+      core.getInput("token", { required: true })
+    );
     const format = core.getInput("files_format", { required: true });
 
     core.info("trying to fetch files");
@@ -139,10 +139,6 @@ async function getFiles() {
         `The base and head commits are missing from the payload for this ${context.eventName} event. ` +
           "Please submit an issue on this action's GitHub repo."
       );
-
-      // To satisfy TypeScript, even though this is unreachable.
-      base = "";
-      head = "";
     }
 
     // Use GitHub's compare two commits API.
