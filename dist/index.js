@@ -9360,8 +9360,8 @@ async function getFiles() {
 
     switch (eventName) {
       case "pull_request":
-        base = context.payload.pull_request?.base?.sha;
-        head = context.payload.pull_request?.head?.sha;
+        base = context.payload.pull_request.base.sha;
+        head = context.payload.pull_request.head.sha;
         break;
       case "push":
         base = context.payload.before;
@@ -9497,7 +9497,7 @@ async function getFiles() {
         break;
     }
 
-    // Log the output values.
+    // Log the output values.a
     core.info(`All: ${allFormatted}`);
     core.info(`Added: ${addedFormatted}`);
     core.info(`Modified: ${modifiedFormatted}`);
