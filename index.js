@@ -22,14 +22,7 @@ async function createCommit(notion, commits) {
     core.info(description);
 
     description += getFiles()
-      .then((value) => {
-        core.info("success!");
-        core.info("success!");
-        core.info("success!");
-        core.info("success! printing the values below");
-        core.info(value);
-        return value;
-      })
+      .then((value) => value)
       .catch((error) => {
         core.info("error!");
         core.info("error!");
