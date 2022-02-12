@@ -3,6 +3,10 @@ const github = require("@actions/github");
 const { GitHub } = require("@actions/github/lib/utils");
 const { Client } = require("@notionhq/client");
 const { createTokenAuth } = require("@octokit/auth-token");
+const { Octokit } = require("@octokit/core");
+const {
+  restEndpointMethods,
+} = require("@octokit/plugin-rest-endpoint-methods");
 
 async function connectToNotion(notion) {
   const response = notion.databases.retrieve({
@@ -103,8 +107,11 @@ async function createCommit(notion, commits) {
 
 async function getFiles() {
   try {
+    const MyOctokit = Octokit.plugin(restEndpointMethods);
+    const octokit = new MyOctokit({
+      auth: core.getInput("token", { required: true }),
+    });
     // Create GitHub client with the API toaken.
-    const client = new GitHub(core.getInput("token", { required: true }));
     const format = core.getInput("files_format", { required: true });
 
     // Ensure that the format parameter is set properly.
@@ -113,7 +120,7 @@ async function getFiles() {
         `Format must be one of 'string-delimited', 'csv', or 'json', got '${format}'.`
       );
     }
-    core.info(client);
+    core.debug(client);
 
     // Debug log the payload.
     core.debug(`Payload keys: ${Object.keys(github.context.payload)}`);
@@ -153,9 +160,14 @@ async function getFiles() {
       head = "";
     }
 
-    // Use GitHub's compare two commits API.aaa
+    // Use GitHub's compare two commits API.
     // https://developer.github.com/v3/repos/commits/#compare-two-commits
-    const response = await client.repos.compareCommits({
+    await octokit.request("GET /repos/{owner}/{repo}/compare/{basehead}", {
+      owner: "octocat",
+      repo: "hello-world",
+      basehead: "basehead",
+    });
+    const response = await octokit.repos.compareCommits({
       base,
       head,
       owner: github.context.repo.owner,
