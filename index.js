@@ -69,7 +69,7 @@ async function createCommit(notion, commits) {
               {
                 type: "text",
                 text: {
-                  content: description,
+                  content: "I can't believe this is not working",
                 },
               },
             ],
