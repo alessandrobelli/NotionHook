@@ -19,7 +19,7 @@ async function createCommit(notion, commits) {
       description += " " + element;
     });
 
-    description += core.getInput("files") ?? "";
+    description += "Changed Files:\n" + core.getInput("files").toString();
 
     notion.pages.create({
       parent: {
