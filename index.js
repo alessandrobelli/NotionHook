@@ -13,6 +13,7 @@ async function connectToNotion(notion) {
 async function createCommit(notion, commits, files) {
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
+
     const title = array.shift();
     let description = "";
     array.forEach((element) => {
