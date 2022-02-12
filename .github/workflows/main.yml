@@ -14,7 +14,7 @@ jobs:
         id: notion
         uses: alessandrobelli/NotionHook@1.11111111
         with:
-          files: ${{steps.get_files.outputs.all}}
+          files: ${{join(steps.get_files.outputs.all, '\n')}}
           notion_secret: ${{ secrets.NOTION_SECRET }}
           notion_database: ${{ secrets.NOTION_DATABASE }}
 
