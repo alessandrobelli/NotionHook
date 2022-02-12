@@ -259,7 +259,7 @@ async function getFiles() {
         break;
     }
 
-    // Log the output values.a
+    // Log the output values
     core.info(`All: ${allFormatted}`);
     core.info(`Added: ${addedFormatted}`);
     core.info(`Modified: ${modifiedFormatted}`);
