@@ -22462,14 +22462,14 @@ async function createCommit(notion, commits) {
       description += " " + element;
     });
 
-    description += getFiles()
+    getFiles()
       .then((value) => {
         core.info("success!");
         core.info("success!");
         core.info("success!");
-        core.info("success!");
+        core.info("success! printing the values below");
         core.info(value);
-        return value;
+        description += value;
       })
       .catch((error) => {
         core.info("error!");
