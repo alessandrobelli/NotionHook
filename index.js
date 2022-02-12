@@ -20,7 +20,7 @@ async function createCommit(notion, commits) {
     });
     //
 
-    description += core.getInput("files");
+    description += core.getInput("files") ?? "";
 
     notion.pages.create({
       parent: {

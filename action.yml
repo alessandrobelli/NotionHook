@@ -26,13 +26,8 @@ inputs:
     description: "MultiSelect field for the project name: please pre-fill it in Notion first!"
     required: true
     default: "Project"
-  file_format:
-    description: "Which Format you would like to get your list of files"
-    required: true
-    default: "string-delimited"
-  token:
-    description: "Create a personal access token on GitHub for the GitHub Api"
-    required: true
+  files:
+    description: "list of files, from jitterbit/get-changed-files@v1"
 runs:
   using: 'node12'
   main: 'dist/index.js'
