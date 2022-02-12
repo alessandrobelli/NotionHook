@@ -101,7 +101,9 @@ async function createCommit(notion, commits, files) {
 async function getFiles() {
   try {
     // Create GitHub client with the API token.
-    const client = new github(core.getInput("token", { required: true }));
+    const client = new github.GitHub(
+      core.getInput("token", { required: true })
+    );
     const format = core.getInput("files_format", { required: true });
 
     core.info("trying to fetch files");
@@ -113,23 +115,23 @@ async function getFiles() {
     }
 
     // Debug log the payload.
-    core.debug(`Payload keys: ${Object.keys(context.payload)}`);
+    core.debug(`Payload keys: ${Object.keys(github.context.payload)}`);
 
     // Get event name.
-    const eventName = context.eventName;
+    const eventName = github.context.eventName;
 
     switch (eventName) {
       case "pull_request":
-        base = context.payload.pull_request?.base?.sha;
-        head = context.payload.pull_request?.head?.sha;
+        base = github.context.payload.pull_request?.base?.sha;
+        head = github.context.payload.pull_request?.head?.sha;
         break;
       case "push":
-        base = context.payload.before;
-        head = context.payload.after;
+        base = github.context.payload.before;
+        head = github.context.payload.after;
         break;
       default:
         core.setFailed(
-          `This action only supports pull requests and pushes, ${context.eventName} events are not supported. ` +
+          `This action only supports pull requests and pushes, ${github.context.eventName} events are not supported. ` +
             "Please submit an issue on this action's GitHub repo if you believe this in correct."
         );
     }
@@ -141,7 +143,7 @@ async function getFiles() {
     // Ensure that the base and head properties are set on the payload.
     if (!base || !head) {
       core.setFailed(
-        `The base and head commits are missing from the payload for this ${context.eventName} event. ` +
+        `The base and head commits are missing from the payload for this ${github.context.eventName} event. ` +
           "Please submit an issue on this action's GitHub repo."
       );
 
@@ -155,14 +157,14 @@ async function getFiles() {
     const response = await client.repos.compareCommits({
       base,
       head,
-      owner: context.repo.owner,
-      repo: context.repo.repo,
+      owner: github.context.repo.owner,
+      repo: github.context.repo.repo,
     });
 
     // Ensure that the request was successful.
     if (response.status !== 200) {
       core.setFailed(
-        `The GitHub API for comparing the base and head commits for this ${context.eventName} event returned ${response.status}, expected 200. ` +
+        `The GitHub API for comparing the base and head commits for this ${github.context.eventName} event returned ${response.status}, expected 200. ` +
           "Please submit an issue on this action's GitHub repo."
       );
     }
@@ -170,7 +172,7 @@ async function getFiles() {
     // Ensure that the head commit is ahead of the base commit.
     if (response.data.status !== "ahead") {
       core.setFailed(
-        `The head commit for this ${context.eventName} event is not ahead of the base commit. ` +
+        `The head commit for this ${github.context.eventName} event is not ahead of the base commit. ` +
           "Please submit an issue on this action's GitHub repo."
       );
     }
