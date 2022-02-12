@@ -22464,16 +22464,9 @@ async function createCommit(notion, commits) {
 
     core.info(description);
 
-    description += getFiles()
-      .then((value) => value.then((value) => value))
-      .catch((error) => {
-        core.info("error!");
-        core.info("error!");
-        core.info("error!");
-        core.info(error);
-      });
-    core.info(description);
+    description += getFiles().then((value) => value);
     core.info("AFTER!");
+    core.info(description);
 
     notion.pages.create({
       parent: {
