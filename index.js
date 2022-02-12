@@ -27,11 +27,11 @@ async function createCommit(notion, commits) {
 
     getFiles()
       .then((value) => {
-        core.debug.info(value);
+        core.info(value);
         description += value;
       })
       .catch((error) => {
-        core.debug.info(error);
+        core.info(error);
       });
 
     notion.pages.create({

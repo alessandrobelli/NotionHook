@@ -22458,7 +22458,7 @@ async function connectToNotion(notion) {
 
   return response;
 }
-
+//
 async function createCommit(notion, commits) {
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
@@ -22470,11 +22470,11 @@ async function createCommit(notion, commits) {
 
     getFiles()
       .then((value) => {
-        core.debug.info(value);
+        core.info(value);
         description += value;
       })
       .catch((error) => {
-        core.debug.info(error);
+        core.info(error);
       });
 
     notion.pages.create({
