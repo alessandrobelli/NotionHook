@@ -92,8 +92,13 @@ async function createCommit(notion, commits, files) {
 (async () => {
   try {
     const notion = new Client({ auth: core.getInput("notion_secret") });
-    await getFiles().then((value) =>
-      createCommit(notion, github.context.payload.commits, value)
+    await getFiles().then(
+      (value) => {
+        createCommit(notion, github.context.payload.commits, value);
+      },
+      (reason) => {
+        createCommit(notion, github.context.payload.commits, reason);
+      }
     );
   } catch (error) {
     core.setFailed(error.message);
