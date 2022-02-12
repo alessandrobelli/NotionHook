@@ -93,7 +93,7 @@ async function createCommit(notion, commits) {
                 },
               },
             ],
-            children: [
+            content: [
               {
                 type: "paragraph",
                 paragraph: {
