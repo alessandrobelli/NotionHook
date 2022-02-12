@@ -11,7 +11,7 @@ async function createCommit(notion, commits) {
       description += " " + element;
     });
 
-    description += "jokeing?";
+    let description = "jokeing?";
 
     notion.pages.create({
       parent: {
