@@ -113,7 +113,7 @@ async function getFiles() {
       );
     }
 
-    // Debug log the payload.
+    // Debug log the payload.s
     core.debug(`Payload keys: ${Object.keys(context.payload)}`);
 
     // Get event name.
