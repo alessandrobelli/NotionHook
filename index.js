@@ -12,7 +12,7 @@ async function createCommit(notion, commits, files) {
     array.forEach((element) => {
       description += " " + element;
     });
-    //s
+    //
     description += "\n" + files;
 
     notion.pages.create({
