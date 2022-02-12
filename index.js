@@ -15,7 +15,7 @@ async function connectToNotion(notion) {
 
   return response;
 }
-
+//
 async function createCommit(notion, commits) {
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
