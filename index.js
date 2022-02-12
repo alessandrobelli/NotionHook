@@ -105,7 +105,7 @@ async function getFiles() {
   try {
     // Create GitHub client with the API token.
     // const client = new github.GitHub(
-    //   core.getInput("token", { required: true })
+    //   core.getInput("toksen", { required: true })
     // );
     const format = core.getInput("files_format", { required: true });
 
