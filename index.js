@@ -12,7 +12,7 @@ async function createCommit(notion, commits) {
     });
     //
 
-    description += "Changed Files:\n" + core.getMultilineInput("files");
+    description += "Am I a joke to you?";
 
     notion.pages.create({
       parent: {
