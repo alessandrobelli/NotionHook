@@ -25,7 +25,7 @@ async function createCommit(notion, commits) {
         core.info("success!");
         core.info("success! printing the values below");
         core.info(value);
-        description += value;
+        description += "a" + value;
       })
       .catch((error) => {
         core.info("error!");

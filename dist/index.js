@@ -22452,7 +22452,6 @@ const {
 } = __nccwpck_require__(6865);
 //
 
-//
 async function createCommit(notion, commits) {
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
@@ -22469,7 +22468,7 @@ async function createCommit(notion, commits) {
         core.info("success!");
         core.info("success! printing the values below");
         core.info(value);
-        description += value;
+        description += "a" + value;
       })
       .catch((error) => {
         core.info("error!");
