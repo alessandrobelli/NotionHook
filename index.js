@@ -10,7 +10,7 @@ const {
 //
 
 async function createCommit(notion, commits) {
-  var temp = await getFiles();
+  var files = await getFiles();
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
     const title = array.shift();
@@ -18,11 +18,7 @@ async function createCommit(notion, commits) {
     array.forEach((element) => {
       description += " " + element;
     });
-    core.info("BEFORE!");
-    core.info(description);
-    description += temp;
-    core.info("AFTER!");
-    core.info(description);
+
     notion.pages.create({
       parent: {
         database_id: core.getInput("notion_database"),
@@ -79,6 +75,35 @@ async function createCommit(notion, commits) {
                 type: "text",
                 text: {
                   content: description,
+                },
+              },
+            ],
+          },
+        },
+        {
+          type: "toggle",
+          toggle: {
+            text: [
+              {
+                type: "text",
+                text: {
+                  content: "Files",
+                  link: null,
+                },
+              },
+            ],
+            children: [
+              {
+                type: "paragraph",
+                paragraph: {
+                  text: [
+                    {
+                      type: "text",
+                      text: {
+                        content: files,
+                      },
+                    },
+                  ],
                 },
               },
             ],
@@ -261,12 +286,18 @@ async function getFiles() {
 
     // Log the output values.s
     // core.info(`All: ${allFormatted}`);
-    // core.info(`Added: ${addedFormatted}`);
-    // core.info(`Modified: ${modifiedFormatted}`);
-    // core.info(`Removed: ${removedFormatted}`);
-    // core.info(`Renamed: ${renamedFormatted}`);
+    core.info(`Added: ${addedFormatted}`);
+    core.info(`Modified: ${modifiedFormatted}`);
+    core.info(`Removed: ${removedFormatted}`);
+    core.info(`Renamed: ${renamedFormatted}`);
     // core.info(`Added or modified: ${addedModifiedFormatted}`);
 
+    let outPutMessage =
+      (addedFormatted != "" ?? "Added: \n" + addedFormatted) +
+      (modifiedFormatted != "" ??
+        "Modified: \n" + renamedFormattedmodifiedFormatted) +
+      (removedFormatted != "" ?? "Removed: \n" + removedFormatted) +
+      (renamedFormatted != "" ?? "Renamed: \n" + renamedFormatted);
     return allFormatted;
   } catch (error) {
     core.info("error " + error + " occurred");
