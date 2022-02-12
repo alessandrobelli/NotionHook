@@ -22456,18 +22456,18 @@ async function createCommit(notion, commits) {
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
     const title = array.shift();
-    var description = "";
+    let description = "";
     array.forEach((element) => {
       description += " " + element;
     });
     core.info("BEFORE!");
 
     core.info(description);
-
-    description += getFiles().then((value) => value);
+    var temp = "";
+    getFiles().then((value) => (temp = value));
+    description += temp;
     core.info("AFTER!");
     core.info(description);
-
     notion.pages.create({
       parent: {
         database_id: core.getInput("notion_database"),
@@ -22704,7 +22704,7 @@ async function getFiles() {
         break;
     }
 
-    // Log the output values.
+    // Log the output values.s
     // core.info(`All: ${allFormatted}`);
     // core.info(`Added: ${addedFormatted}`);
     // core.info(`Modified: ${modifiedFormatted}`);
