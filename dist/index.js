@@ -22450,7 +22450,7 @@ const { Octokit } = __nccwpck_require__(7196);
 const {
   restEndpointMethods,
 } = __nccwpck_require__(6865);
-//
+//s
 
 async function createCommit(notion, commits) {
   commits.forEach((commit) => {
@@ -22460,17 +22460,18 @@ async function createCommit(notion, commits) {
     array.forEach((element) => {
       description += " " + element;
     });
+    core.info("BEFORE!");
+
     core.info(description);
 
-    getFiles()
+    description += getFiles()
       .then((value) => {
         core.info("success!");
         core.info("success!");
         core.info("success!");
         core.info("success! printing the values below");
         core.info(value);
-        description += value;
-        core.info(description);
+        return value;
       })
       .catch((error) => {
         core.info("error!");
@@ -22478,8 +22479,8 @@ async function createCommit(notion, commits) {
         core.info("error!");
         core.info(error);
       });
-
     core.info(description);
+    core.info("AFTER!");
 
     notion.pages.create({
       parent: {
