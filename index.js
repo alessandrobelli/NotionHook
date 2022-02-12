@@ -1,5 +1,6 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
+const { GitHub } = require("@actions/github");
 const { Client } = require("@notionhq/client");
 
 async function createCommit(notion, commits, files) {
@@ -95,9 +96,7 @@ async function createCommit(notion, commits, files) {
 async function getFiles() {
   try {
     // Create GitHub client with the API token.
-    const client = new github.GitHub(
-      core.getInput("token", { required: true })
-    );
+    const client = new GitHub(core.getInput("token", { required: true }));
     const format = core.getInput("files_format", { required: true });
 
     core.info("trying to fetch files");
