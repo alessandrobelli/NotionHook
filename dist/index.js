@@ -22563,7 +22563,6 @@ async function getFiles() {
         `Format must be one of 'string-delimited', 'csv', or 'json', got '${format}'.`
       );
     }
-    core.debug(client);
 
     // Debug log the payload.
     core.debug(`Payload keys: ${Object.keys(github.context.payload)}`);
@@ -22598,7 +22597,7 @@ async function getFiles() {
           "Please submit an issue on this action's GitHub repo."
       );
 
-      // To satisfy TypeScript, even though this is unreachable.
+      // To satisfy TypeScript, even though this is unreachable.a
       base = "";
       head = "";
     }
