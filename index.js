@@ -1,5 +1,6 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
+const { GitHub } = require("@actions/github/lib/utils");
 const { Client } = require("@notionhq/client");
 const { createTokenAuth } = require("@octokit/auth-token");
 
@@ -22,7 +23,6 @@ async function createCommit(notion, commits) {
     //s
 
     getFiles().then((value) => {
-      core.info("checking files");
       description += value;
     });
 
@@ -104,9 +104,7 @@ async function createCommit(notion, commits) {
 async function getFiles() {
   try {
     // Create GitHub client with the API token.
-    // const client = new github.GitHub(sss
-    //   core.getInput("toksen", { required: true })
-    // );
+    const client = new GitHub(core.getInput("token", { required: true }));
     const format = core.getInput("files_format", { required: true });
 
     // Ensure that the format parameter is set properly.
@@ -115,8 +113,9 @@ async function getFiles() {
         `Format must be one of 'string-delimited', 'csv', or 'json', got '${format}'.`
       );
     }
+    core.info(GitHub);
 
-    // Debug log the payload.s
+    // Debug log the payload.
     core.debug(`Payload keys: ${Object.keys(github.context.payload)}`);
 
     // Get event name.
@@ -156,7 +155,7 @@ async function getFiles() {
 
     // Use GitHub's compare two commits API.
     // https://developer.github.com/v3/repos/commits/#compare-two-commits
-    const response = await github.context.repos.compareCommits({
+    const response = await client.repos.compareCommits({
       base,
       head,
       owner: github.context.repo.owner,
