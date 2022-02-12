@@ -8,13 +8,7 @@ const {
   restEndpointMethods,
 } = require("@octokit/plugin-rest-endpoint-methods");
 //
-async function connectToNotion(notion) {
-  const response = notion.databases.retrieve({
-    database_id: core.getInput("notion_database"),
-  });
 
-  return response;
-}
 //
 async function createCommit(notion, commits) {
   commits.forEach((commit) => {
@@ -25,12 +19,19 @@ async function createCommit(notion, commits) {
       description += " " + element;
     });
 
-    getFiles()
+    description += getFiles()
       .then((value) => {
+        core.info("success!");
+        core.info("success!");
+        core.info("success!");
+        core.info("success!");
         core.info(value);
-        description += value;
+        return value;
       })
       .catch((error) => {
+        core.info("error!");
+        core.info("error!");
+        core.info("error!");
         core.info(error);
       });
 
