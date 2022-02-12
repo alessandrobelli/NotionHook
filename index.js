@@ -9,7 +9,6 @@ const {
 } = require("@octokit/plugin-rest-endpoint-methods");
 //
 
-//
 async function createCommit(notion, commits) {
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
