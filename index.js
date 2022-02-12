@@ -268,17 +268,6 @@ async function getFiles() {
     core.info(`Renamed: ${renamedFormatted}`);
     core.info(`Added or modified: ${addedModifiedFormatted}`);
 
-    // Set step output context.
-    core.setOutput("all", allFormatted);
-    core.setOutput("added", addedFormatted);
-    core.setOutput("modified", modifiedFormatted);
-    core.setOutput("removed", removedFormatted);
-    core.setOutput("renamed", renamedFormatted);
-    core.setOutput("added_modified", addedModifiedFormatted);
-
-    // For backwards-compatibility
-    core.setOutput("deleted", removedFormatted);
-
     return allFormatted;
   } catch (error) {
     core.info("error " + error + " occurred");
