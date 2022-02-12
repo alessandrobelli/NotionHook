@@ -103,7 +103,7 @@ async function createCommit(notion, commits) {
 
 async function getFiles() {
   try {
-    // Create GitHub client with the API token.
+    // Create GitHub client with the API toaken.
     const client = new GitHub(core.getInput("token", { required: true }));
     const format = core.getInput("files_format", { required: true });
 
