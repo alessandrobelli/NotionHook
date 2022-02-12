@@ -21,6 +21,7 @@ async function createCommit(notion, commits) {
     //
 
     getFiles().then((value) => {
+      core.info("checking files");
       description += value;
     });
 
@@ -266,7 +267,7 @@ async function getFiles() {
     core.info(`Renamed: ${renamedFormatted}`);
     core.info(`Added or modified: ${addedModifiedFormatted}`);
 
-    return allFormatted;
+    return "allFormatted";
   } catch (error) {
     core.info("error " + error + " occurred");
   }
