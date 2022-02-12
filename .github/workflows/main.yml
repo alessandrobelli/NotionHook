@@ -5,7 +5,7 @@ jobs:
     outputs:
       files: steps.get_files.outputs.all
     runs-on: ubuntu-latest
-    name: Sync your commits to Notion
+    name: get list of changed files
     steps:
       - name: get changed files
         uses: jitterbit/get-changed-files@v1
@@ -13,6 +13,7 @@ jobs:
         with:
           format: 'space-delimited'
   Notion_Hook_job:
+      name: Sync your commits to Notion
       needs: get_files
       runs-on: ubuntu-latest
       steps:
@@ -20,7 +21,7 @@ jobs:
         id: notion
         uses: alessandrobelli/NotionHook@1.111111111
         with:
-          files: ${{needs.get_files.outputs.files}}
+          files: echo ${{needs.get_files.outputs.files}}
           notion_secret: ${{ secrets.NOTION_SECRET }}
           notion_database: ${{ secrets.NOTION_DATABASE }}
 
