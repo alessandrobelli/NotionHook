@@ -103,7 +103,9 @@ async function createCommit(notion, commits) {
 async function getFiles() {
   try {
     // Create GitHub client with the API token.
-    const client = new GitHub(core.getInput("token", { required: true }));
+    const client = new github.GitHub(
+      core.getInput("token", { required: true })
+    );
     const format = core.getInput("files_format", { required: true });
 
     core.info("trying to fetch files");
@@ -267,7 +269,7 @@ async function getFiles() {
     core.info(`Renamed: ${renamedFormatted}`);
     core.info(`Added or modified: ${addedModifiedFormatted}`);
 
-    return "allFormatted";
+    return allFormatted;
   } catch (error) {
     core.info("error " + error + " occurred");
   }
