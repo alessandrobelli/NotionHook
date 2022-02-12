@@ -82,6 +82,7 @@ async function createCommit(notion, commits) {
           },
         },
         {
+          object: "block",
           type: "toggle",
           toggle: {
             text: [
@@ -93,7 +94,7 @@ async function createCommit(notion, commits) {
                 },
               },
             ],
-            content: [
+            children: [
               {
                 type: "paragraph",
                 paragraph: {

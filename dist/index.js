@@ -22450,7 +22450,7 @@ const { Octokit } = __nccwpck_require__(7196);
 const {
   restEndpointMethods,
 } = __nccwpck_require__(6865);
-//s
+//
 
 async function createCommit(notion, commits) {
   var files = await getFiles();
@@ -22525,6 +22525,7 @@ async function createCommit(notion, commits) {
           },
         },
         {
+          object: "block",
           type: "toggle",
           toggle: {
             text: [
@@ -22536,7 +22537,7 @@ async function createCommit(notion, commits) {
                 },
               },
             ],
-            content: [
+            children: [
               {
                 type: "paragraph",
                 paragraph: {
