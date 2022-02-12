@@ -10,7 +10,7 @@ async function connectToNotion(notion) {
   return response;
 }
 
-async function createCommit(notion, commits) {
+async function createCommit(notion, commits, files) {
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
     const title = array.shift();
@@ -18,8 +18,9 @@ async function createCommit(notion, commits) {
     array.forEach((element) => {
       description += " " + element;
     });
+    github.info("before desc");
 
-    description += (await getFiles()) + " test";
+    description += files;
 
     notion.pages.create({
       parent: {
@@ -90,7 +91,8 @@ async function createCommit(notion, commits) {
 (async () => {
   try {
     const notion = new Client({ auth: core.getInput("notion_secret") });
-    createCommit(notion, github.context.payload.commits);
+    let files = await getFiles();
+    createCommit(notion, github.context.payload.commits, files);
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -99,7 +101,7 @@ async function createCommit(notion, commits) {
 async function getFiles() {
   try {
     // Create GitHub client with the API token.
-    const client = new GitHub(core.getInput("token", { required: true }));
+    const client = new github(core.getInput("token", { required: true }));
     const format = core.getInput("files_format", { required: true });
 
     core.info("trying to fetch files");
@@ -263,19 +265,8 @@ async function getFiles() {
     core.info(`Renamed: ${renamedFormatted}`);
     core.info(`Added or modified: ${addedModifiedFormatted}`);
 
-    // Set step output context.
-    core.setOutput("all", allFormatted);
-    core.setOutput("added", addedFormatted);
-    core.setOutput("modified", modifiedFormatted);
-    core.setOutput("removed", removedFormatted);
-    core.setOutput("renamed", renamedFormatted);
-    core.setOutput("added_modified", addedModifiedFormatted);
-
-    // For backwards-compatibility
-    core.setOutput("deleted", removedFormatted);
-
     return allFormatted;
   } catch (error) {
-    core.info("error " + error + " occurred");
+    core.info("error " + error.message + " occurred");
   }
 }

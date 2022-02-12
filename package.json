@@ -10,9 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/alessandrobelli/NotionHook.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["notion-hook","Notion","productivity"],
+  "author": "Alessandro Belli",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/alessandrobelli/NotionHook/issues"
   },
