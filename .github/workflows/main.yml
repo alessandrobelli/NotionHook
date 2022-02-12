@@ -1,7 +1,9 @@
 on: [push]
 
 jobs:
-  Notion_Hook_job:
+  get_files:
+    outputs:
+      files: steps.get_files.outputs.all
     runs-on: ubuntu-latest
     name: Sync your commits to Notion
     steps:
@@ -10,11 +12,15 @@ jobs:
         id: get_files
         with:
           format: 'space-delimited'
-      - name: Connect to Notion step
+  Notion_Hook_job:
+      needs: get_files
+      runs-on: ubuntu-latest
+      steps:
+      - name: Connect to Notion
         id: notion
         uses: alessandrobelli/NotionHook@1.111111111
         with:
-          files: ${{join(steps.get_files.outputs.all, '\n')}}
+          files: ${{needs.get_files.outputs.files}}
           notion_secret: ${{ secrets.NOTION_SECRET }}
           notion_database: ${{ secrets.NOTION_DATABASE }}
 
