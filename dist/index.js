@@ -22463,6 +22463,55 @@ async function createCommit(notion, commits) {
       description += " " + element;
     });
 
+    let filesBlock;
+    switch (core.getInput("files_format")) {
+      case "space_delimited":
+        filesBlock = {
+          object: "block",
+          type: "toggle",
+          toggle: {
+            text: [
+              {
+                type: "text",
+                text: {
+                  content: "Files",
+                  link: null,
+                },
+                annotations: {
+                  bold: true,
+                  italic: false,
+                  strikethrough: false,
+                  underline: false,
+                  code: false,
+                  color: "default",
+                },
+              },
+            ],
+            children: [
+              {
+                type: "paragraph",
+                paragraph: {
+                  text: [
+                    {
+                      type: "text",
+                      text: {
+                        content: files,
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        };
+
+        break;
+
+      default:
+        core.setFailed("Other files list tipes not supported.");
+        break;
+    }
+
     notion.pages.create({
       parent: {
         database_id: core.getInput("notion_database"),
@@ -22524,37 +22573,8 @@ async function createCommit(notion, commits) {
             ],
           },
         },
-        {
-          object: "block",
-          type: "toggle",
-          toggle: {
-            text: [
-              {
-                type: "text",
-                text: {
-                  content: "Files",
-                  link: null,
-                },
-              },
-            ],
-            children: [
-              {
-                type: "paragraph",
-                paragraph: {
-                  text: [
-                    {
-                      type: "text",
-                      text: {
-                        content: files,
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-          },
-        },
       ],
+      filesBlock,
     });
   });
 }
@@ -22739,7 +22759,7 @@ async function getFiles() {
 
     let outPutMessage =
       (addedFormatted != "" ? "Added: \n" + addedFormatted : "") +
-      (modifiedFormatted != "" ? "**Modified** \n" + modifiedFormatted : "") +
+      (modifiedFormatted != "" ? "Modified \n" + modifiedFormatted : "") +
       (removedFormatted != "" ? "Removed: \n" + removedFormatted : "") +
       (renamedFormatted != "" ? "Renamed: \n" + renamedFormatted : "");
     return outPutMessage;
