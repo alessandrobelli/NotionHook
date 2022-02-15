@@ -22453,7 +22453,7 @@ const {
 
 async function createCommit(notion, commits) {
   let fileFormat = core.getInput("files_format");
-  if (core.getInput("token") !== "") fileFormat = "none";
+  if (core.getInput("token") === "") fileFormat = "none";
   var files = await getFiles();
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
@@ -22640,7 +22640,7 @@ async function getFiles() {
           "Please submit an issue on this action's GitHub repo."
       );
 
-      // To satisfy TypeScript, even though this is unreachable.a
+      // To satisfy TypeScript, even though this is unreachable.
       base = "";
       head = "";
     }

@@ -10,7 +10,7 @@ const {
 
 async function createCommit(notion, commits) {
   let fileFormat = core.getInput("files_format");
-  if (core.getInput("token") !== "") fileFormat = "none";
+  if (core.getInput("token") === "") fileFormat = "none";
   var files = await getFiles();
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
