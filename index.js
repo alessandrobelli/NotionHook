@@ -197,7 +197,7 @@ async function getFiles() {
           "Please submit an issue on this action's GitHub repo."
       );
 
-      // To satisfy TypeScript, even though this is unreachable.a
+      // To satisfy TypeScript, even though this is unreachable.
       base = "";
       head = "";
     }
