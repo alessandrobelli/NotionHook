@@ -23,6 +23,8 @@ async function createCommit(notion, commits) {
     let filesBlock;
     switch (fileFormat) {
       case "text-list":
+        core.info("Formatting Notion Block for:");
+        core.info(files);
         filesBlock = {
           object: "block",
           type: "toggle",

@@ -22466,6 +22466,8 @@ async function createCommit(notion, commits) {
     let filesBlock;
     switch (fileFormat) {
       case "text-list":
+        core.info("Formatting Notion Block for:");
+        core.info(files);
         filesBlock = {
           object: "block",
           type: "toggle",
@@ -22599,18 +22601,12 @@ async function getFiles() {
     const octokit = new MyOctokit({
       auth: core.getInput("token", { required: true }),
     });
-    // Create GitHub client with the API toaken.
     const format = core.getInput("files_format", { required: true });
 
-    // Ensure that the format parameter is set properly.s
     if (format !== "text-list") {
       core.setFailed("file output format not supported.");
     }
-
-    // Debug log the payload.
     core.debug(`Payload keys: ${Object.keys(github.context.payload)}`);
-
-    // Get event name.
     const eventName = github.context.eventName;
 
     switch (eventName) {
@@ -22629,24 +22625,19 @@ async function getFiles() {
         );
     }
 
-    // Log the base and head commits
     core.info(`Base commit: ${base}`);
     core.info(`Head commit: ${head}`);
 
-    // Ensure that the base and head properties are set on the payload.
     if (!base || !head) {
       core.setFailed(
         `The base and head commits are missing from the payload for this ${github.context.eventName} event. ` +
           "Please submit an issue on this action's GitHub repo."
       );
 
-      // To satisfy TypeScript, even though this is unreachable.
       base = "";
       head = "";
     }
 
-    // Use GitHub's compare two commits API.
-    // https://developer.github.com/v3/repos/commits/#compare-two-commitss
     const response = await octokit.repos.compareCommits({
       base,
       head,
@@ -22654,7 +22645,6 @@ async function getFiles() {
       repo: github.context.repo.repo,
     });
 
-    // Ensure that the request was successful.
     if (response.status !== 200) {
       core.setFailed(
         `The GitHub API for comparing the base and head commits for this ${github.context.eventName} event returned ${response.status}, expected 200. ` +
@@ -22662,7 +22652,6 @@ async function getFiles() {
       );
     }
 
-    // Ensure that the head commit is ahead of the base commit.
     if (response.data.status !== "ahead") {
       core.setFailed(
         `The head commit for this ${github.context.eventName} event is not ahead of the base commit. ` +
@@ -22709,7 +22698,6 @@ async function getFiles() {
       }
     }
 
-    // Format the arrays of changed files.
     let allFormatted,
       addedFormatted,
       modifiedFormatted,
@@ -22718,7 +22706,6 @@ async function getFiles() {
       addedModifiedFormatted;
     switch (format) {
       case "text-list":
-        // If any of the filenames have a space in them, then fail the step.
         for (const file of all) {
           if (file.includes(" "))
             core.setFailed(
