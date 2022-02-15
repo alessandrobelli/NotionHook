@@ -28,11 +28,9 @@ inputs:
     default: "Project"
   files_format:
     description: "Which Format you would like to get your list of files"
-    required: true
-    default: "string-delimited"
+    default: "text-list"
   token:
     description: "Create a personal access token on GitHub for the GitHub Api"
-    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'

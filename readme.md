@@ -41,6 +41,9 @@ Name of the Database column for the commit ID.
 
 Name of the Database column for the project. 
 
+### `files_format`
+
+For now, the only possible value text-list.
 
 ## Example usage
 
