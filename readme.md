@@ -13,6 +13,7 @@ This action syncronize your Repository commits into a Notion Database.
 5. Navigate to your Notion database in a browser and get the Database Id.
 ![Database ID example](https://user-images.githubusercontent.com/3796324/126894870-e81d2831-9ac2-404a-bc07-a2d9d4014a39.png)
 6. Create a new secret called `NOTION_DATABASE` with the database ID.
+7. if you want a list of files, [create a github personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 ## Inputs
 
