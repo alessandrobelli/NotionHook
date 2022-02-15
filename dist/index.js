@@ -22450,11 +22450,11 @@ const { Octokit } = __nccwpck_require__(7196);
 const {
   restEndpointMethods,
 } = __nccwpck_require__(6865);
-//s
 
 async function createCommit(notion, commits) {
+  let fileFormat = core.getInput("files_format");
+  if (core.getInput("token") !== "") fileFormat = "none";
   var files = await getFiles();
-  core.info(files);
   commits.forEach((commit) => {
     const array = commit.message.split(/\r?\n/);
     const title = array.shift();
@@ -22464,8 +22464,8 @@ async function createCommit(notion, commits) {
     });
 
     let filesBlock;
-    switch (core.getInput("files_format")) {
-      case "space_delimited":
+    switch (fileFormat) {
+      case "text-list":
         filesBlock = {
           object: "block",
           type: "toggle",
@@ -22506,9 +22506,14 @@ async function createCommit(notion, commits) {
         };
 
         break;
+      case "none":
+        core.info("No file will be listed");
+        break;
 
       default:
-        core.setFailed("Other files list tipes not supported.");
+        core.setFailed(
+          "Other files list tipes not supported or file type not specified."
+        );
         break;
     }
 
@@ -22598,10 +22603,8 @@ async function getFiles() {
     const format = core.getInput("files_format", { required: true });
 
     // Ensure that the format parameter is set properly.s
-    if (format !== "space-delimited") {
-      core.setFailed(
-        `Format must be one of 'string-delimited', 'csv', or 'json', got '${format}'.`
-      );
+    if (format !== "text-list") {
+      core.setFailed("file output format not supported.");
     }
 
     // Debug log the payload.
@@ -22677,9 +22680,7 @@ async function getFiles() {
       addedModified = [];
     for (const file of files) {
       const filename = file.filename;
-      // If we're using the 'space-delimited' format and any of the filenames have a space in them,
-      // then fail the step.
-      if (format === "space-delimited" && filename.includes(" ")) {
+      if (format === "text-list" && filename.includes(" ")) {
         core.setFailed(
           `One of your files includes a space. Consider using a different output format or removing spaces from your filenames. ` +
             "Please submit an issue on this action's GitHub repo."
@@ -22716,7 +22717,7 @@ async function getFiles() {
       renamedFormatted,
       addedModifiedFormatted;
     switch (format) {
-      case "space-delimited":
+      case "text-list":
         // If any of the filenames have a space in them, then fail the step.
         for (const file of all) {
           if (file.includes(" "))
