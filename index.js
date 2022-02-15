@@ -137,8 +137,8 @@ async function createCommit(notion, commits) {
             ],
           },
         },
+        filesBlock,
       ],
-      filesBlock,
     });
   });
 }

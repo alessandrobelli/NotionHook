@@ -22580,8 +22580,8 @@ async function createCommit(notion, commits) {
             ],
           },
         },
+        filesBlock,
       ],
-      filesBlock,
     });
   });
 }
@@ -22737,7 +22737,7 @@ async function getFiles() {
         break;
     }
 
-    // Log the output values.
+    // Log the output values.s
     // core.info(`All: ${allFormatted}`);
     // core.info(`Added: ${addedFormatted}`);
     // core.info(`Modified: ${modifiedFormatted}`);
