@@ -216,7 +216,6 @@ async function getFiles() {
       );
     }
 
-    // Get the changed files from the response payload.
     const files = response.data.files;
     const all = [],
       added = [],
