@@ -20,6 +20,13 @@ async function createCommit(notion, commits) {
       description += " " + element;
     });
 
+    const task = commit.message.substring(commit.message.indexOf("atnt:") + 6);
+
+    // search for a page in the Notion database "Tasks" given the task name
+    const page = notion.pages.filter(
+      (page) => page.properties.title === task
+    )[0];
+
     let filesBlock;
     switch (fileFormat) {
       case "text-list":
@@ -90,6 +97,9 @@ async function createCommit(notion, commits) {
               },
             },
           ],
+        },
+        task: {
+          relation: [{ id: page.id }],
         },
         [core.getInput("commit_url")]: {
           url: commit.url,
