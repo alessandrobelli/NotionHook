@@ -13,7 +13,7 @@ inputs:
   commit_description:
     description: "Name of the Database column for the description field: this is the commit message after a carriage return."
     required: true
-    default: "description"
+    default: "Description"
   commit_url:
     description: "Name of Database column for commit url"
     required: true
